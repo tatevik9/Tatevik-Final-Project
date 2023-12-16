@@ -1,0 +1,87 @@
+<html>
+ <head>
+    <link rel="stylesheet" href="BlogStyles.css">
+    <style></style>
+    <title>Blog Page</title>
+ </head>
+   <body>
+      <nav>
+        <a href="About page.html">About</a>
+        <a href="E-shop page.html">E-shop</a>
+        <a href="Blog page.html">Blog</a>
+        <a href="Contact page.html">Contact</a>
+      </nav>
+     <section>
+        <img src="">
+        <h1>Blog</h1>
+        <h3>Here you can find articles about the history of different spices, their origins and search for interesting recipes!</h3>
+     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <input id="search"><button onclick="getrecepe(document.getElementById('search').value)">Search for recipes </button>
+    <div id="output"></div>
+    <a href="" id="sourceLink"></a>
+    <script>
+      function getsource(id) {
+        $.ajax({
+          url: "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=235f3f4bc90a4a9f8ab7f49d827c7d1f",
+          success: function (res) {
+            document.getElementById("sourceLink").innerHTML = res.sourceUrl;
+            document.getElementById("sourceLink").href = res.sourceUrl;
+          }
+        });
+      }
+    
+      function getrecepe(q) {
+        $.ajax({
+        url: "https://api.spoonacular.com/recipes/search?apiKey=235f3f4bc90a4a9f8ab7f49d827c7d1f&number=1&query=" + q,
+        success: function (res) {
+        document.getElementById("output").innerHTML = "<h1>" + res.results[0].title + "</h1><br><img src='" + res.baseUri + res.results[0].image + "' width='400'/><br>Ready in " + res.results[0].readyInMinutes + " minutes";
+        getsource(res.results[0].id);
+      }
+      });
+      }
+    </script>
+     <main>
+      <section id="posts">
+          <article class="post">
+              <h3>The oldest Indian spice</h3>
+              <p>India is rich with flavours and we all surely tried famous spcies from India. But which one is the oldest?</p>
+              <img src="pics/Indian Spice.jpg" alt="The oldest Indian spice">
+              <button>Read more</button>
+          </article>
+          <article class="post">
+            <h3> Why is this so expensive?</h3>
+            <p> Cinnamon rolls are getting more popular! But why are they so expesnive? All because of their key ingridient.</p>
+            <img src="pics/cinnamon.jpg" alt="Cinnamon is getting expensive!">
+            <button>Read more</button>
+        </article>
+        <article class="post">
+         <h3>Must try soup!</h3>
+         <p>Warming and comforting this Autumn Squash Soup is mildly spiced, slightly sweet, and really easy to make.</p>
+         <img src="pics/soup.jpg" alt="Must try soup!">
+         <button>Read more</button>
+     </article>
+      </section>
+      <section id="posts">
+        <article class="post">
+            <h3>Where is cardamom from?</h3>
+            <p>This spice was born in the region now called the Cardamom Hills.</p>
+            <img src="pics/cardamom-hills1.jpg" alt="cardamom Hills">
+            <button>Read more</button>
+        </article>
+        <article class="post">
+          <h3> Try this recipie!</h3>
+          <p> This stuffed chicken is your Thanksgiving eve's must have!</p>
+          <img src="pics/Thanksgiving-Chicken-featured-image.jpg" alt="Try this recipie!">
+          <button>Read more</button>
+      </article>
+      <article class="post">
+       <h3>Why do need tahini?</h3>
+       <p>Tahini contains more protein than milk and most nuts.</p>
+       <img src="pics/Tahini.jpg" alt="Why do need tahini? ">
+       <button>Read more</button>
+   </article>
+    </section>
+  </main>
+   </body>
+</html>
